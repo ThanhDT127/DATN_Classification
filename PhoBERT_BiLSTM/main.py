@@ -10,7 +10,7 @@ app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-MODEL_PATH = "D:/ktlt/python/thuchanh/DATN/PhoBERT_BiLSTM/best_model_1.pth"
+MODEL_PATH = "best_model_1.pth"
 
 class TextInput(BaseModel):
     text: str

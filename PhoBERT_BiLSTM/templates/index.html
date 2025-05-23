@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Phân loại văn bản</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        textarea, input[type="text"] { width: 100%; max-width: 500px; }
+        button { margin-top: 10px; padding: 5px 10px; }
+        #result { margin-top: 20px; }
+    </style>
+    <script>
+        async function classifyText() {
+            const text = document.getElementById("textInput").value;
+            if (!text) {
+                alert("Vui lòng nhập văn bản!");
+                return;
+            }
+
+            try {
+                const response = await fetch("/predict", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ text: text })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const resultDiv = document.getElementById("result");
+                resultDiv.innerHTML = `
+                    <strong>Cảm xúc:</strong> ${data.emotion}<br>
+                    <strong>Sản phẩm:</strong> ${data.binary["sản phẩm"]}<br>
+                    <strong>Giá cả:</strong> ${data.binary["giá cả"]}<br>
+                    <strong>Vận chuyển:</strong> ${data.binary["vận chuyển"]}<br>
+                    <strong>Thái độ và dịch vụ khách hàng:</strong> ${data.binary["thái độ và dịch vụ khách hàng"]}<br>
+                    <strong>Khác:</strong> ${data.binary["khác"]}
+                `;
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Có lỗi xảy ra khi phân loại văn bản!");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Phân loại văn bản</h1>
+
+
+    <div>
+        <h2>Nhập văn bản</h2>
+        <textarea id="textInput" rows="4" placeholder="Nhập văn bản cần phân loại..."></textarea><br>
+        <button onclick="classifyText()">Phân loại</button>
+    </div>
+
+
+    <div>
+        <h2>Nhập link</h2>
+        <input type="text" placeholder="Nhập link (chưa hoạt động)"><br>
+    </div>
+
+
+    <div id="result"></div>
+</body>
+</html>

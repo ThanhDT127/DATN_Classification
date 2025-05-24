@@ -5,12 +5,26 @@ import torch
 import torch.nn as nn
 from transformers import AutoModel, AutoTokenizer
 import uvicorn
+from huggingface_hub import hf_hub_download
+import os
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
+HF_REPO = "your-user/pho-bert-bilstm"
+HF_FILE  = "best_model_1.pth"
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-MODEL_PATH = "best_model_1.pth"
+MODEL_PATH = os.path.join("models", HF_FILE)
+if not os.path.exists(MODEL_PATH):
+    os.makedirs("models", exist_ok=True)
+    print("Downloading model from Hugging Face Hub…")
+    MODEL_PATH = hf_hub_download(
+      repo_id=HF_REPO,
+      filename=HF_FILE,
+      cache_dir="models",     
+      force_filename=HF_FILE
+    )
 
 class TextInput(BaseModel):
     text: str

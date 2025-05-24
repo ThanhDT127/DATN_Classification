@@ -4,3 +4,4 @@ torch
 transformers
 jinja2
 pydantic
+huggingface_hub

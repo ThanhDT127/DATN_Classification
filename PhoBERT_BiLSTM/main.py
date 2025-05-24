@@ -11,6 +11,7 @@ import os
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
+HF_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 HF_REPO = "your-user/pho-bert-bilstm"
 HF_FILE  = "best_model_1.pth"
 
@@ -23,7 +24,8 @@ if not os.path.exists(MODEL_PATH):
       repo_id=HF_REPO,
       filename=HF_FILE,
       cache_dir="models",     
-      force_filename=HF_FILE
+      force_filename=HF_FILE,
+      token=HF_TOKEN 
     )
 
 class TextInput(BaseModel):
@@ -60,7 +62,7 @@ class BertBiLSTMClassifier(nn.Module):
         }
         return emo_logits, bin_logits
 
-# Khởi tạo tokenizer & model
+
 tokenizer = AutoTokenizer.from_pretrained("vinai/phobert-base")
 binary_cols = [
     'sản phẩm', 'giá cả', 'vận chuyển',
@@ -111,5 +113,3 @@ async def predict_text(input: TextInput):
     emotion, binary = predict(input.text)
     return {"emotion": emotion, "binary": binary}
 
-if __name__ == "__main__":
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)

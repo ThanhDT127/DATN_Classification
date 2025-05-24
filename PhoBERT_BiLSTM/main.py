@@ -12,7 +12,7 @@ app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
 HF_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
-HF_REPO = "your-user/pho-bert-bilstm"
+HF_REPO = "ThanhDT127/pho-bert-bilstm"
 HF_FILE  = "best_model_1.pth"
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

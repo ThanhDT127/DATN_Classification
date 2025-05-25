@@ -16,7 +16,10 @@ HF_REPO = "ThanhDT127/pho-bert-bilstm"
 HF_FILE  = "best_model_1.pth"
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-MODEL_PATH = os.path.join("models", HF_FILE)
+MODEL_DIR = "models"
+os.makedirs(MODEL_DIR, exist_ok=True)
+MODEL_PATH = os.path.join(MODEL_DIR, HF_FILE)
+
 if not os.path.exists(MODEL_PATH):
     os.makedirs("models", exist_ok=True)
     print("Downloading model from Hugging Face Hub…")

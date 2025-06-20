@@ -81,13 +81,19 @@ Dự án này xây dựng một hệ thống **phân loại cảm xúc** và **g
 * FastAPI Docs
 * PyTorch MultiTask Learning
 
-✨ Đóng Góp & Phát Triển
-Mọi ý kiến đóng góp, báo lỗi hoặc cải tiến mô hình đều được chào đón.
-Bạn có thể:
+✨ Đóng Góp & Phát Triển 
+Mọi ý kiến đóng góp, báo lỗi hoặc cải tiến mô hình đều được chào đón. Bạn có thể:
+
 -- Fork và mở PR
+
 -- Tạo issue nếu gặp bug
+
 -- Góp ý mô hình, hiệu năng hoặc trải nghiệm người dùng
+
 📧 Liên Hệ :
+
 💼 Tác giả: [An Đức Thanh]
+
 📮 Email: anthanh8573@gmail.com
+
 📌 Đồ án tốt nghiệp Khoa CNTT, Trường Đại Học Giao Thông Vận Tải, 2025

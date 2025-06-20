@@ -22,6 +22,7 @@ Dự án này xây dựng một hệ thống **phân loại cảm xúc** và **g
 ---
 
 ## 📁 Cấu Trúc Dự Án
+
 DATN_Classification/
 ├── API_labelling/                 # Gán nhãn dữ liệu bằng LLM thông qua Groq API
 │   ├── API_labelling/            # Gồm script gọi API, xử lý response, lưu kết quả

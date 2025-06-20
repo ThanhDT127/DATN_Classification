@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Phân loại văn bản</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-6">
+  <div class="bg-white shadow-xl rounded-lg p-8 w-full max-w-xl">
+    <h1 class="text-2xl font-bold text-center text-blue-600 mb-6">Phân loại văn bản cảm xúc & khía cạnh</h1>
+
+    <label for="textInput" class="block mb-2 text-sm font-medium text-gray-700">Nhập văn bản:</label>
+    <textarea id="textInput" rows="4" placeholder="Nhập văn bản cần phân loại..."
+      class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"></textarea>
+
+    <button onclick="classifyText()"
+      class="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-200">
+      Phân loại
+    </button>
+
+    <div id="result" class="mt-6 text-sm text-gray-800"></div>
+  </div>
+
+  <script>
+    async function classifyText() {
+      const text = document.getElementById("textInput").value;
+      if (!text) {
+        alert("Vui lòng nhập văn bản!");
+        return;
+      }
+
+      try {
+        const response = await fetch("/predict", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text })
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = `
+          <p><strong>Cảm xúc:</strong> <span class="text-blue-600">${data.emotion}</span></p>
+          <p><strong>Sản phẩm:</strong> ${data.binary["sản phẩm"]}</p>
+          <p><strong>Giá cả:</strong> ${data.binary["giá cả"]}</p>
+          <p><strong>Vận chuyển:</strong> ${data.binary["vận chuyển"]}</p>
+          <p><strong>Thái độ và dịch vụ khách hàng:</strong> ${data.binary["thái độ và dịch vụ khách hàng"]}</p>
+          <p><strong>Khác:</strong> ${data.binary["khác"]}</p>
+        `;
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Có lỗi xảy ra khi phân loại văn bản!");
+      }
+    }
+  </script>
+</body>
+</html>

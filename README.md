@@ -11,13 +11,6 @@ Dự án này xây dựng một hệ thống **phân loại cảm xúc** và **g
 - Phân loại cảm xúc: `tiêu cực`, `trung tính`, `tích cực`
 - Nhận diện 5 khía cạnh: `sản phẩm`, `giá cả`, `vận chuyển`, `thái độ & dịch vụ`, `khác`
 
-## Bạn có thể thử nghiệp ngay với giao diện trên hugging face : 
-
-https://huggingface.co/spaces/ThanhDT127/DATN
-
-![image](https://github.com/user-attachments/assets/37698b07-2f7d-4c5a-89fa-81c98ec81c50)
-
-
 ## 📌 Tính Năng Chính
 
 - ✅ Tự động crawl review từ Tiki & Lazada
@@ -71,6 +64,12 @@ https://huggingface.co/spaces/ThanhDT127/DATN
   * POST `/predict`: nhận input, tokenize, dự đoán, decode nhãn
 * Load PhoBERT + BiLSTM model, ngưỡng threshold được tinh chỉnh
 * Gửi ra nhãn cảm xúc + danh mục nhị phân "có/không"
+
+## 🚀 Thử nghiệp ngay với giao diện trên hugging face: https://huggingface.co/spaces/ThanhDT127/DATN
+
+![image](https://github.com/user-attachments/assets/37698b07-2f7d-4c5a-89fa-81c98ec81c50)
+
+
 
 📊 Kết Quả Mô Hình
 
